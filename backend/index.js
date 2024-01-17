@@ -22,10 +22,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/compile", async (req, res) => {
-	console.log(req.body);
-	const data = await compile(req.body);
-	console.log("Data: ", data);
-	res.json(data);
+	try {
+		const data = await compile(req.body);
+		res.json(data);
+	} catch (error) {
+		res.json({ status: false, error: error.message });
+	}
 });
 
 //-------------------------------------------------
