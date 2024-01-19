@@ -14,6 +14,7 @@ export default function Home() {
 	const [input, setInput] = useState("");
 	const [output, setOutput] = useState("");
 	const [error, setError] = useState("");
+	const [executionTime, setExecutionTime] = useState(null);
 
 	const extensions = [
 		language == "JAVA" ? java() : language == "PYTHON" ? python() : cpp(),
@@ -34,6 +35,7 @@ export default function Home() {
 			}
 			setError();
 			setOutput("");
+			setExecutionTime(null);
 			const response = await fetch("http://localhost:5000/compile", {
 				method: "POST",
 				headers: {
@@ -49,8 +51,11 @@ export default function Home() {
 			});
 
 			const data = await response.json();
-			if (data.output) setOutput(data.output);
-			if (data.error) setError(data.error);
+
+			if (data.output) {
+				setOutput(data.output);
+				setExecutionTime(data.executionTime);
+			} else setError(data.error);
 			console.log(data);
 		} catch (error) {
 			setError(error.message);
@@ -99,8 +104,17 @@ export default function Home() {
 						<div className="w-full h-[20%] bg-slate-600 font-bold flex items-center justify-center">
 							Output
 						</div>
-						<div className="font-bold w-full p-2 h-[80%] bg-[#0d0425] text-white overflow-auto">
-							{output}
+						<div className="w-full h-[80%] bg-[#0d0425] text-white overflow-auto flex flex-col justify-between">
+							<div className="p-2">{output}</div>
+							{executionTime && (
+								<div className="w-full bg-purple-950 px-1 text-center">
+									Execution Time:{" "}
+									<span className="text-green-500">
+										{executionTime}
+									</span>{" "}
+									ms
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

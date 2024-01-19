@@ -31,7 +31,7 @@ app.post("/compile", async (req, res) => {
 		try {
 			console.log(req.body);
 			const data = await compileC(req.body);
-			console.log("Data: ", data);
+			console.log("C: ", data);
 			res.json(data);
 		} catch (error) {
 			res.json({ status: false, error: error.message });
@@ -40,7 +40,7 @@ app.post("/compile", async (req, res) => {
 		try {
 			console.log(req.body);
 			const data = await compileCPP(req.body);
-			console.log("Data: ", data);
+			console.log("CPP: ", data);
 			res.json(data);
 		} catch (error) {
 			res.json({ status: false, error: error.message });
@@ -49,7 +49,7 @@ app.post("/compile", async (req, res) => {
 		try {
 			console.log(req.body);
 			const data = await compileJava(req.body);
-			console.log("Data: ", data);
+			console.log("JAVA: ", data);
 			res.json(data);
 		} catch (error) {
 			res.json({ status: false, error: error.message });
@@ -58,7 +58,7 @@ app.post("/compile", async (req, res) => {
 		try {
 			console.log(req.body);
 			const data = await compilePython(req.body);
-			console.log("Data: ", data);
+			console.log("PYTHON: ", data);
 			res.json(data);
 		} catch (error) {
 			res.json({ status: false, error: error.message });
