@@ -44,7 +44,7 @@ export default function Home() {
 					code: code,
 					language: language,
 					input: input,
-					config: config[language],
+					timeout: 1000,
 				}),
 			});
 
